@@ -1,0 +1,147 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #007BFF;
+    padding: 1rem 0;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.auth-buttons a {
+    margin-left: 20px;
+    color: white;
+    background-color: #0056b3;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    background: url('hero-bg.jpg') no-repeat center center/cover;
+    color: grey;
+    padding: 120px 20px;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.btn-secondary {
+    background-color: #34b4eb;
+    
+    padding: 12px 24px;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    background-color: white;
+    text-align: center;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature {
+    text-align: center;
+    width: 20%;
+}
+
+.feature i {
+    font-size: 48px;
+    color: #007BFF;
+}
+
+.feature h3 {
+    margin: 15px 0;
+    font-size: 24px;
+}
+
+/* Templates Section */
+.templates {
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.template-gallery {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.template {
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 28%;
+}
+
+/* Footer Section */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
