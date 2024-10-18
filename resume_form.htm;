@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4caf50;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        textarea {
+            height: 80px;
+        }
+        .btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create Your Resume</h1>
+    <form id="resumeForm" action="resume_template_1.html" method="GET">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" name="jobTitle" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" placeholder="Street, City, State, Zip Code" required>
+
+        <label for="profile">Profile Summary:</label>
+        <textarea id="profile" name="profile" placeholder="A brief summary about yourself"></textarea>
+
+        <label for="experience">Professional Experience:</label>
+        <textarea id="experience" name="experience" placeholder="Describe your work experience"></textarea>
+
+        <label for="education">Education:</label>
+        <textarea id="education" name="education" placeholder="Enter your education details"></textarea>
+
+        <label for="skill">Skill (one at a time):</label>
+        <input type="text" id="skill" placeholder="Enter your skill">
+        <button type="button" onclick="addSkill()">Add Skill</button>
+        <div id="skillList"></div>
+
+        <label for="language">Language (one at a time):</label>
+        <input type="text" id="language" placeholder="Enter your language">
+        <button type="button" onclick="addLanguage()">Add Language</button>
+        <div id="languageList"></div>
+
+        <button type="submit" class="btn">Generate Resume</button>
+    </form>
+</div>
+
+<script>
+    const skills = [];
+    const languages = [];
+
+    function addSkill() {
+        const skillInput = document.getElementById('skill');
+        const skill = skillInput.value.trim();
+        if (skill) {
+            skills.push(skill);
+            updateSkillList();
+            skillInput.value = '';
+        }
+    }
+
+    function addLanguage() {
+        const languageInput = document.getElementById('language');
+        const language = languageInput.value.trim();
+        if (language) {
+            languages.push(language);
+            updateLanguageList();
+            languageInput.value = '';
+        }
+    }
+
+    function updateSkillList() {
+        const skillList = document.getElementById('skillList');
+        skillList.innerHTML = skills.map((skill, index) => `<div>${skill} <button type="button" onclick="removeSkill(${index})">Remove</button></div>`).join('');
+    }
+
+    function removeSkill(index) {
+        skills.splice(index, 1);
+        updateSkillList();
+    }
+
+    function updateLanguageList() {
+        const languageList = document.getElementById('languageList');
+        languageList.innerHTML = languages.map((language, index) => `<div>${language} <button type="button" onclick="removeLanguage(${index})">Remove</button></div>`).join('');
+    }
+
+    function removeLanguage(index) {
+        languages.splice(index, 1);
+        updateLanguageList();
+    }
+
+    document.getElementById('resumeForm').onsubmit = function() {
+        const form = new FormData(this);
+        form.append('skills', skills.join(','));
+        form.append('languages', languages.join(','));
+        const queryString = new URLSearchParams(form).toString();
+        window.location.href = 'resume_template_1.html?' + queryString;
+        return false; // Prevent default form submission
+    };
+</script>
+
+</body>
+</html>
