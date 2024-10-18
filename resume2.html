@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Template</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            border: 2px solid red;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-weight: bold;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header h2 {
+            font-weight: normal;
+            font-size: 20px;
+            color: #555;
+            margin-top: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: #ff4d4d;
+        }
+
+        .nationality {
+            margin-top: 10px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .nationality i {
+            color: #ff4d4d;
+            margin-right: 10px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            font-weight: bold;
+            color: black;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .skills-list, .languages-list {
+            display: block;
+            flex-wrap: wrap;
+            font-size: 16px;
+        }
+
+        .skills-list span, .languages-list span {
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 16px;
+            background-color: #f0f0f0;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <h1 id="fullName">Full Name</h1>
+        <h2 id="jobTitle">Job Title</h2>
+    </div>
+
+    <!-- Contact Info Section -->
+    <div class="contact-info">
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span id="email">Email</span>
+        </div>
+
+        <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <span id="phone">Phone</span>
+        </div>
+
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="address">Address</span>
+        </div>
+    </div>
+
+    <div class="nationality">
+        <i class="fas fa-flag"></i>
+        <span id="nationality">Nationality</span>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="section">
+        <h3>Profile</h3>
+        <p id="profile">Profile details go here.</p>
+    </div>
+
+    <!-- Professional Experience Section -->
+    <div class="section">
+        <h3>Professional Experience</h3>
+        <p id="experience">Experience details go here.</p>
+    </div>
+
+    <!-- Education Section -->
+    <div class="section">
+        <h3>Education</h3>
+        <p id="education">Education details go here.</p>
+    </div>
+
+    <!-- Certifications Section -->
+    <div class="section">
+        <h3>Certifications</h3>
+        <p id="certifications">Certification details go here.</p>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="section">
+        <h3>Skills</h3>
+        <div class="skills-list" id="skills">
+            <!-- Skills and levels will be populated here -->
+        </div>
+    </div>
+
+    <!-- Languages Section -->
+    <div class="section">
+        <h3>Languages</h3>
+        <div class="languages-list" id="languages">
+            <!-- Languages will be populated here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // Retrieve data from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Populate the fields with user input
+    document.getElementById('fullName').textContent = urlParams.get('fullName') || "Full Name";
+    document.getElementById('jobTitle').textContent = urlParams.get('jobTitle') || "Job Title";
+    document.getElementById('email').textContent = urlParams.get('email') || "Email";
+    document.getElementById('phone').textContent = urlParams.get('phone') || "Phone";
+    document.getElementById('address').textContent = urlParams.get('address') || "Address";
+    document.getElementById('profile').textContent = urlParams.get('profile') || "Profile details go here.";
+    document.getElementById('experience').textContent = urlParams.get('experience') || "Experience details go here.";
+    document.getElementById('education').textContent = urlParams.get('education') || "Education details go here.";
+    document.getElementById('certifications').textContent = urlParams.get('certifications') || "Certification details go here.";
+
+    // Populate skills with levels
+    const skills = urlParams.getAll('skills[]');
+    const skillLevels = urlParams.getAll('skillLevels[]'); // Retrieve skill levels
+
+    skills.forEach((skill, index) => {
+        const skillItem = document.createElement('div');
+        skillItem.className = 'skill-item';
+        skillItem.textContent = `${skill.trim()} - ${skillLevels[index].trim()}`; // Display skill with level
+        document.getElementById('skills').appendChild(skillItem);
+    });
+
+    // Populate languages
+    const languages = urlParams.getAll('languages[]');
+    languages.forEach(language => {
+        const languageItem = document.createElement('span');
+        languageItem.textContent = language.trim();
+        document.getElementById('languages').appendChild(languageItem);
+    });
+</script>
+
+</body>
+</html>
