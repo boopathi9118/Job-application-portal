@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"].invalid, textarea.invalid {
+            border: 1px solid red;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .add-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .add-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Container for dynamic fields */
+        .dynamic-fields {
+            margin-bottom: 20px;
+        }
+
+        .dynamic-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .remove-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .remove-btn:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create Your Resume</h1>
+    <form id="resumeForm" action="resume2.html" method="GET">
+        <!-- Full Name -->
+        <div class="input-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullNameInput" name="fullName" required>
+        </div>
+
+        <!-- Job Title -->
+        <div class="input-group">
+            <label for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitleInput" name="jobTitle" required>
+        </div>
+
+        <!-- Location -->
+        <div class="input-group">
+            <label for="location">Location:</label>
+            <input type="text" id="locationInput" name="address" required>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="text" id="emailInput" name="email" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="input-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phoneInput" name="phone" required>
+        </div>
+
+        <!-- Profile -->
+        <div class="input-group">
+            <label for="profile">Profile:</label>
+            <textarea id="profileInput" name="profile" required></textarea>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="input-group">
+            <label for="experience">Professional Experience:</label>
+            <textarea id="experienceInput" name="experience" required></textarea>
+        </div>
+
+        <!-- Education -->
+        <div class="input-group">
+            <label for="education">Education:</label>
+            <textarea id="educationInput" name="education" required></textarea>
+        </div>
+
+        <!-- Certifications -->
+        <div class="input-group">
+            <label for="certifications">Certifications:</label>
+            <textarea id="certificationsInput" name="certifications"></textarea>
+        </div>
+
+        <!-- Languages Section (Dynamic) -->
+        <div class="dynamic-fields">
+            <label for="languages">Languages:</label>
+            <div id="languages-container"></div>
+            <button type="button" class="add-btn" id="add-language">Add Language</button>
+        </div>
+
+        <!-- Skills Section (Dynamic) -->
+        <div class="dynamic-fields">
+            <label for="skills">Skills:</label>
+            <div id="skills-container">
+                <div class="dynamic-field">
+                    <input type="text" name="skills[]" placeholder="Skill Name">
+                    <select name="skillLevels[]">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                    <button type="button" class="remove-btn">Remove</button>
+                </div>
+            </div>
+            <button type="button" class="add-btn" id="add-skill">Add Skill</button>
+        </div>
+
+        <input type="submit" value="Generate Resume">
+    </form>
+</div>
+
+<script>
+    // Function to add a new language input
+    function addLanguageField() {
+        const container = document.getElementById('languages-container');
+        const inputGroup = document.createElement('div');
+        inputGroup.className = 'dynamic-field';
+        inputGroup.innerHTML = `
+            <input type="text" name="languages[]" placeholder="Language" required>
+            <button type="button" class="remove-btn">Remove</button>
+        `;
+        container.appendChild(inputGroup);
+
+        // Add remove functionality to the newly added field
+        inputGroup.querySelector('.remove-btn').addEventListener('click', () => {
+            inputGroup.remove();
+        });
+    }
+
+    // Function to add a new skill input
+    function addSkillField() {
+        const container = document.getElementById('skills-container');
+        const inputGroup = document.createElement('div');
+        inputGroup.className = 'dynamic-field';
+        inputGroup.innerHTML = `
+            <input type="text" name="skills[]" placeholder="Skill Name" required>
+            <select name="skillLevels[]">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <button type="button" class="remove-btn">Remove</button>
+        `;
+        container.appendChild(inputGroup);
+
+        // Add remove functionality to the newly added field
+        inputGroup.querySelector('.remove-btn').addEventListener('click', () => {
+            inputGroup.remove();
+        });
+    }
+
+    // Add event listeners to buttons
+    document.getElementById('add-language').addEventListener('click', addLanguageField);
+    document.getElementById('add-skill').addEventListener('click', addSkillField);
+
+    // Form validation (check if any field is left empty and add red border)
+    document.getElementById('resumeForm').addEventListener('submit', function(event) {
+        const inputs = document.querySelectorAll('input[type="text"], textarea');
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.classList.add('invalid');
+                isValid = false;
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault(); // Prevent form submission if any field is invalid
+        }
+    });
+</script>
+
+</body>
+</html>
