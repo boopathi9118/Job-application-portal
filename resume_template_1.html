@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Template 1</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #D7D0DA; /* Changed to light blue */
+            border-radius: 9px;
+            border: 5px solid black;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #9351A6;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header h2 {
+            font-size: 20px;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .left-column {
+            width: 45%;
+            border-right: 2px solid black; /* Vertical line */
+            padding-right: 20px; /* Space from the line */
+        }
+
+        .right-column {
+            width: 45%;
+            padding-left: 20px; /* Space from the line */
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h3 {
+            margin: 0 0 10px;
+            color: #AC75BB;
+            border-bottom: 2px solid black;
+            display: inline-block;
+        }
+
+        .skills-list, .languages-list {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 16px; /* Increased font size */
+        }
+
+        .skills-list span, .languages-list span {
+            padding: 8px 12px; /* Increased padding */
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 16px; /* Increased size for skills/languages */
+            background-color: #E2EAF4; /* Optional: Background color for skills/languages */
+        }
+
+        .contact-info {
+            margin-bottom: 5px;
+        }
+
+        .contact-info h3 {
+            border-bottom: 2px solid black;
+             color: #AC75BB;
+
+        }
+
+        .contact-info p {
+            margin: px 0;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column; /* Stack columns vertically */
+            }
+
+            .left-column, .right-column {
+                width: 100%; /* Full width on mobile */
+                border-right: none; /* Remove vertical line */
+                padding: 0; /* Remove padding */
+                margin-bottom: 20px; /* Space between stacked columns */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 id="fullName"></h1> <!-- Filled from user input -->
+        <h2 id="jobTitle"></h2> <!-- Filled from user input -->
+    </div>
+
+    <div class="content">
+        <div class="left-column">
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <p id="email"></p> <!-- Filled from user input -->
+                <p id="phone"></p> <!-- Filled from user input -->
+                <p id="address"></p> <!-- Filled from user input -->
+            </div>
+
+            <div class="section">
+                <h3>Skills</h3>
+                <div class="skills-list" id="skills"></div> <!-- Filled from user input -->
+            </div>
+
+            <div class="section">
+                <h3>Languages</h3>
+                <div class="languages-list" id="languages"></div> <!-- Filled from user input -->
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="section">
+                <h3>Profile</h3>
+                <p id="profile"></p> <!-- Filled from user input -->
+            </div>
+
+            <div class="section">
+                <h3>Professional Experience</h3>
+                <p id="experience"></p> <!-- Filled from user input -->
+            </div>
+
+            <div class="section">
+                <h3>Education</h3>
+                <p id="education"></p> <!-- Filled from user input -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Populate the fields with user input
+    document.getElementById('fullName').textContent = urlParams.get('fullName');
+    document.getElementById('jobTitle').textContent = urlParams.get('jobTitle');
+    document.getElementById('email').textContent = urlParams.get('email');
+    document.getElementById('phone').textContent = urlParams.get('phone');
+    document.getElementById('address').textContent = urlParams.get('address');
+    document.getElementById('profile').textContent = urlParams.get('profile');
+    document.getElementById('experience').textContent = urlParams.get('experience');
+    document.getElementById('education').textContent = urlParams.get('education');
+
+    // Populate skills
+    const skills = urlParams.get('skills').split(',');
+    skills.forEach(skill => {
+        const skillItem = document.createElement('span');
+        skillItem.textContent = skill.trim();
+        document.getElementById('skills').appendChild(skillItem);
+    });
+
+    // Populate languages
+    const languages = urlParams.get('languages').split(',');
+    languages.forEach(language => {
+        const languageItem = document.createElement('span');
+        languageItem.textContent = language.trim();
+        document.getElementById('languages').appendChild(languageItem);
+    });
+</script>
+
+</body>
+</html>
