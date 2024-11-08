@@ -11,7 +11,7 @@
         <div class="register-box">
             <h2>Create Your Account</h2>
             <p>Please fill in the details below to create a new account.</p>
-            <form action="/register" method="post">
+            <form id="register-form" action="/register" method="post">
                 <div class="input-group">
                     <label for="fullname">Full Name</label>
                     <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
@@ -36,5 +36,16 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // You can add your logic to send data to the server here.
+            // After successful registration, redirect to index.html
+            // Simulate successful registration for demo purposes
+            window.location.href = "index.html"; // Redirect to index.html
+        });
+    </script>
 </body>
 </html>
