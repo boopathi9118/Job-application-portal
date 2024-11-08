@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Template 2</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F8F8F8;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-column {
+            background-color: #6D3D7D;
+            color: white;
+            padding: 20px;
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-image {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .left-column h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .left-column h2 {
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .left-column p {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .left-column .section {
+            margin-top: 20px;
+        }
+
+        .left-column .section h3 {
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .right-column {
+            padding: 20px;
+            width: 65%;
+        }
+
+        .right-column .section {
+            margin-bottom: 20px;
+        }
+
+        .right-column .section h3 {
+            font-size: 18px;
+            color: #6D3D7D;
+            margin-bottom: 10px;
+        }
+
+        .right-column .section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .skills-list, .languages-list {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+
+        .skills-list span, .languages-list span {
+            background-color: #EEE;
+            color: #333;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left-column">
+       <div class="section">
+    <h3>Profile</h3>
+    <img id="profilePhoto" src="" alt="Profile Photo" style="width: 150px; height: auto; border-radius: 50%; display: none;">
+    <p id="profile"></p> <!-- Filled from user input -->
+</div>
+
+        <h1 id="fullName"></h1> <!-- User's full name -->
+        <h2 id="jobTitle"></h2> <!-- User's job title -->
+        <div class="section">
+            <h3>Contact</h3>
+            <p id="email"></p>
+            <p id="phone"></p>
+            <p id="address"></p>
+        </div>
+        <div class="section">
+            <h3>Languages</h3>
+            <div class="languages-list" id="languages"></div>
+        </div>
+    </div>
+
+    <div class="right-column">
+        
+        <div class="section">
+            <h3>Professional Experience</h3>
+            <p id="experience"></p>
+        </div>
+        <div class="section">
+            <h3>Education</h3>
+            <p id="education"></p>
+        </div>
+               <div class="section">
+            <h3>Skills</h3>
+            <div class="skills-list" id="skills"></div>
+        </div>
+                   </div>
+</div>
+
+<script>
+    // Retrieve the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Populate the resume with the provided details
+    document.getElementById('fullName').textContent = urlParams.get('fullName');
+    document.getElementById('jobTitle').textContent = urlParams.get('jobTitle');
+    document.getElementById('email').textContent = urlParams.get('email');
+    document.getElementById('phone').textContent = urlParams.get('phone');
+    document.getElementById('address').textContent = urlParams.get('address');
+    document.getElementById('profile').textContent = urlParams.get('profile');
+    document.getElementById('experience').textContent = urlParams.get('experience');
+    document.getElementById('education').textContent = urlParams.get('education');
+           // Populate skills
+    const skills = urlParams.get('skills') ? urlParams.get('skills').split(',') : [];
+    skills.forEach(skill => {
+        const skillItem = document.createElement('span');
+        skillItem.textContent = skill.trim();
+        document.getElementById('skills').appendChild(skillItem);
+    });
+
+    // Populate languages
+    const languages = urlParams.get('languages') ? urlParams.get('languages').split(',') : [];
+    languages.forEach(language => {
+        const languageItem = document.createElement('span');
+        languageItem.textContent = language.trim();
+        document.getElementById('languages').appendChild(languageItem);
+    });
+// Get the photo URL from URL parameters and display it
+const photoUrl = urlParams.get('photoUrl');
+if (photoUrl) {
+    const profilePhoto = document.getElementById('profilePhoto');
+    profilePhoto.src = photoUrl;
+    profilePhoto.style.display = 'block'; // Show the photo
+}
+
+</script>
+
+</body>
+</html>
