@@ -3,55 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Resume Builder</title>
+    <title>OTP in JS</title>
+    <!-- Internal CSS -->
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
         body {
-            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            height: 100vh;
         }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .form {
+            width: 500px;
+            background-color: #eeeeee;
+            padding: 0 30px;
+            display: grid;
+            gap: 20px;
+            padding-bottom: 30px;
         }
-        h1 {
-            color: #333;
+        input {
+            width: 100%;
+            padding: 10px;
         }
-        p {
-            line-height: 1.6;
-            color: #555;
+        .otpverify {
+            width: 100%;
+            display: flex;
+            gap: 20px;
         }
-        .contact-info {
-            margin-top: 20px;
+        .btn {
+            padding: 10px;
+            background-color: #82eec1;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 150px;
         }
-        .contact-info div {
-            margin-bottom: 10px;
-        }
-        .contact-info a {
-            color: #2196F3;
-            text-decoration: none;
+        .otpverify {
+            display: none;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>Contact Us</h1>
-    <p>Feel free to reach out to us through any of the following channels:</p>
-
-    <div class="contact-info">
-        <div><strong>Email:</strong> <a href="mailto:your-email@example.com">your-email@example.com</a></div>
-        <div><strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a></div>
-        <div><strong>Instagram:</strong> <a href="https://instagram.com/your_instagram_id" target="_blank">@your_instagram_id</a></div>
-        <div><strong>Facebook:</strong> <a href="https://facebook.com/your_facebook_id" target="_blank">facebook.com/your_facebook_id</a></div>
-        <div><strong>YouTube:</strong> <a href="https://youtube.com/your_youtube_channel" target="_blank">youtube.com/your_youtube_channel</a></div>
-        <div><strong>WhatsApp:</strong> <a href="https://wa.me/1234567890" target="_blank">Chat with us on WhatsApp</a></div>
+    <div class="form">
+        <h1>Enter your Email</h1>
+        <input type="email" id="email" placeholder="Enter Email...">
+        <div class="otpverify">
+            <input type="text" id="otp_inp" placeholder="Enter the OTP sent to your Email...">
+            <button class="btn" id="otp-btn">Verify</button>
+        </div>
+        <button class="btn" onclick="sendOTP()">Send OTP</button>
     </div>
-</div>
 
+    <!-- SMTP JS Library -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <!-- Internal JavaScript -->
+    <script>
+        function sendOTP() {
+            const email = document.getElementById('email');
+            const otpverify = document.getElementsByClassName('otpverify')[0];
+
+            let otp_val = Math.floor(Math.random() * 10000);
+
+            let emailbody = `<h2>Your OTP is </h2>${otp_val}`;
+            Email.send({
+                SecureToken: "bb6853c1-e700-45c6-a6b0-c9761fab4557",
+                To: email.value,
+                From: "mohammedakmal9786@gmail.com",
+                Subject: "Email OTP using JavaScript",
+                Body: emailbody,
+            }).then(
+                message => {
+                    if (message === "OK") {
+                        alert("OTP sent to your email " + email.value);
+
+                        otpverify.style.display = "flex";
+                        const otp_inp = document.getElementById('otp_inp');
+                        const otp_btn = document.getElementById('otp-btn');
+
+                        otp_btn.addEventListener('click', () => {
+                            if (otp_inp.value == otp_val) {
+                                alert("Email address verified...");
+                            } else {
+                                alert("Invalid OTP");
+                            }
+                        });
+                    }
+                }
+            );
+        }
+    </script>
 </body>
 </html>
