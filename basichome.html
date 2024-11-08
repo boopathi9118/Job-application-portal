@@ -6,6 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>JOB PORTAL - Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Adjusted template size with reduced height */
+        .template {
+            width: 200px; /* Fixed width */
+            height: 100px; /* Reduced height */
+            display: flex;
+            justify-content: center; /* Center text horizontally */
+            align-items: center; /* Center text vertically */
+            border: 1px solid #ddd; /* Optional: Border */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Shadow */
+            font-size: 20px; /* Adjust font size */
+            text-align: center;
+            margin: 20px; /* Space between templates */
+        }
+
+        .template-gallery {
+            display: flex;
+            justify-content: space-around; /* Space the templates out evenly */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+    </style>
 </head>
 <body>
 
@@ -24,10 +46,7 @@
                 <li><a href="about us.html">About Us</a></li>
                 <li><a href="contact us.html">Contact</a></li>
             </ul>
-            <div class="auth-buttons">
-                <a href="register.html" class="btn-signup">Sign Up</a>
-                <a href="index.html" class="btn-signin">Sign In</a>
-            </div>
+    
         </nav>
     </header>
 
@@ -37,12 +56,8 @@
             <h1>Build Your Perfect Resume in Minutes</h1>
             <p>Easy, Fast, and Professional Resume Templates</p>
             <a href="#" class="btn-primary">Get Started for Free</a>
-           
         </div>
     </section>
-
-    <!-- Features Section -->
-   
 
     <!-- Templates Section -->
     <section class="templates">
@@ -50,14 +65,17 @@
         <div class="template-gallery">
             <!-- Example templates (you can replace with images) -->
             <a href="resume_form.html">
-            <div class="template">Template 1</div>
+                <div class="template">Template 1</div>
             </a>
-            <div class="template">Template 2</div>
+            <a href="form_2.html">
+                <div class="template">Template 2</div>
+            </a>
             <div class="template">Template 3</div>
         </div>
     </section>
 
-   <section class="features">
+    <!-- Features Section -->
+    <section class="features">
         <h2>Why Choose Us?</h2>
         <div class="features-container">
             <div class="feature">
@@ -82,7 +100,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- Footer Section -->
     <footer>
